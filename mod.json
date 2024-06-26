@@ -1,0 +1,11 @@
+{
+	"geode": "3.0.0",
+	"gd": {
+	    "win": "2.206"
+	},
+	"version": "v1.0.0",
+	"id": "firefly7386.savesongs",
+	"name": "SaveSongs",
+	"developer": "FireFly7386",
+	"description": "This mod allows you to copy songs easily to another location than GD"
+}
