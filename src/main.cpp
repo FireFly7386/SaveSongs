@@ -23,9 +23,14 @@ class $modify(LevelInfoLayerHook, LevelInfoLayer) {
     return true;
   }
 
+  struct Fields {
+    Task<Result<std::filesystem::path>> pathToSaveToTask; 
+    EventListener<Task<Result<std::filesystem::path>>> pathToSaveToListener;
+  };
+
   void onMyButton(CCObject*) {
     auto songFileName = this->m_level->getAudioFileName();
-    Task<Result<std::filesystem::path>> pathToSaveToTask = utils::file::pick(
+    m_fields->pathToSaveToTask = utils::file::pick(
         utils::file::PickMode::SaveFile,
         utils::file::FilePickOptions {
           .filters = {
@@ -33,11 +38,18 @@ class $modify(LevelInfoLayerHook, LevelInfoLayer) {
           }
         }
       );
-    EventListener<Task<Result<std::filesystem::path>>> pathToSaveToListener;
-    pathToSaveToListener.bind([songFileName](Task<Result<std::filesystem::path>>::Event* event) {
-      FLAlertLayer::create("Export Song", "Name: " + event->getValue()->value().filename().string(), "OK")->show();
+
+    m_fields->pathToSaveToListener.bind([songFileName](Task<Result<std::filesystem::path>>::Event* event) {
+        if(!event->getValue()->isOk()) return;
+        try {
+          std::filesystem::copy(songFileName, event->getValue()->value());
+          FLAlertLayer::create("Done!", "Successfully exported song", "OK")->show();
+        } catch (const std::filesystem::filesystem_error& e) {
+          FLAlertLayer::create("Error", "Error while exporting song", "OK")->show();
+        }
     });
-    pathToSaveToListener.setFilter(pathToSaveToTask);
+
+    m_fields->pathToSaveToListener.setFilter(m_fields->pathToSaveToTask);
   }
 };
 
