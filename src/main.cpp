@@ -1,4 +1,5 @@
 #include <Geode/Geode.hpp>
+#include <filesystem>
 
 using namespace geode::prelude;
 
@@ -29,13 +30,11 @@ class $modify(LevelInfoLayerHook, LevelInfoLayer) {
   };
 
   void onMyButton(CCObject*) {
-    auto songFileName = this->m_level->getAudioFileName();
+    std::filesystem::path songFileName = this->m_level->getAudioFileName();
     m_fields->pathToSaveToTask = utils::file::pick(
         utils::file::PickMode::SaveFile,
         utils::file::FilePickOptions {
-          .filters = {
-              { "MP3 Files", { "*.mp3" } }
-          }
+          .defaultPath = this->m_songWidget->m_songLabel->getString() + songFileName.extension().string()
         }
       );
 
