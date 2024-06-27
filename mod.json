@@ -7,5 +7,12 @@
 	"id": "firefly7386.savesongs",
 	"name": "SaveSongs",
 	"developer": "FireFly7386",
-	"description": "This mod allows you to copy songs easily to another location than GD"
+	"description": "This mod allows you to copy songs easily to another location than GD",
+  "dependencies": [
+        {
+            "id": "geode.node-ids",
+            "version": ">=v1.12.0",
+            "importance": "required"
+        }
+    ]
 }
