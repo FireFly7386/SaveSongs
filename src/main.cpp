@@ -11,7 +11,7 @@ class $modify(LevelInfoLayerHook, LevelInfoLayer) {
     auto saveSongButton = CCMenuItemSpriteExtra::create(
 			CCSprite::createWithSpriteFrameName("GJ_orderUpBtn_001.png"),
 			this,
-			menu_selector(LevelInfoLayerHook::onMyButton)
+			menu_selector(LevelInfoLayerHook::onSaveSongButton)
 		);
 
     auto menu = this->getChildByID("left-side-menu");
@@ -29,7 +29,7 @@ class $modify(LevelInfoLayerHook, LevelInfoLayer) {
     EventListener<Task<Result<std::filesystem::path>>> pathToSaveToListener;
   };
 
-  void onMyButton(CCObject*) {
+  void onSaveSongButton(CCObject*) {
     std::filesystem::path songFileName = this->m_level->getAudioFileName();
     m_fields->pathToSaveToTask = utils::file::pick(
         utils::file::PickMode::SaveFile,
@@ -39,7 +39,8 @@ class $modify(LevelInfoLayerHook, LevelInfoLayer) {
       );
 
     m_fields->pathToSaveToListener.bind([songFileName](Task<Result<std::filesystem::path>>::Event* event) {
-        if(!event->getValue()->isOk()) return;
+        if(!event->getValue()) return;
+        if(event->getValue()->isErr()) return;
         try {
           std::filesystem::copy(songFileName, event->getValue()->value());
           FLAlertLayer::create("Done!", "Successfully exported song", "OK")->show();

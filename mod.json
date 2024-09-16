@@ -1,10 +1,10 @@
 {
-	"geode": "3.0.0",
+	"geode": "3.7.1",
 	"gd": {
 	    "win": "2.206",
       "mac": "2.206"
 	},
-	"version": "v1.1.0",
+	"version": "v1.2.0",
 	"id": "firefly7386.savesongs",
 	"name": "SaveSongs",
 	"developer": "FireFly7386",
@@ -12,7 +12,7 @@
   "dependencies": [
         {
             "id": "geode.node-ids",
-            "version": ">=v1.12.0",
+            "version": ">=v1.13.0",
             "importance": "required"
         }
     ]
