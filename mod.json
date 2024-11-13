@@ -1,15 +1,15 @@
 {
-	"geode": "3.7.1",
+	"geode": "4.0.0-alpha.1",
 	"gd": {
-	    "win": "2.206",
-      "mac": "2.206"
+	    "win": "2.2074",
+      	"mac": "2.2074"
 	},
-	"version": "v1.2.0",
+	"version": "v1.3.0",
 	"id": "firefly7386.savesongs",
 	"name": "SaveSongs",
 	"developer": "FireFly7386",
-	"description": "This mod allows you to copy songs easily to another location than GD",
-  "dependencies": [
+	"description": "This mod allows you to export songs out of GD",
+  	"dependencies": [
         {
             "id": "geode.node-ids",
             "version": ">=v1.13.0",

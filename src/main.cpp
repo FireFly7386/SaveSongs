@@ -42,7 +42,7 @@ class $modify(LevelInfoLayerHook, LevelInfoLayer) {
         if(!event->getValue()) return;
         if(event->getValue()->isErr()) return;
         try {
-          std::filesystem::copy(songFileName, event->getValue()->value());
+          std::filesystem::copy(songFileName, event->getValue()->unwrap());
           FLAlertLayer::create("Done!", "Successfully exported song", "OK")->show();
         } catch (const std::filesystem::filesystem_error& e) {
           FLAlertLayer::create("Error", "Error while exporting song", "OK")->show();
