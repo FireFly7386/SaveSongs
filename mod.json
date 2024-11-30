@@ -1,10 +1,10 @@
 {
-	"geode": "4.0.0-alpha.1",
+	"geode": "4.0.1",
 	"gd": {
 	    "win": "2.2074",
       	"mac": "2.2074"
 	},
-	"version": "v1.3.0-alpha",
+	"version": "v1.3.0",
 	"id": "firefly7386.savesongs",
 	"name": "SaveSongs",
 	"developer": "FireFly7386",
